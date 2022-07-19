@@ -1,0 +1,20 @@
+html,
+body {
+    background-color: #9884F0;
+    color: white;
+    min-height: 100vh;
+}
+
+.todo {
+    background-color: #F0EDD3;
+}
+
+.todo-complete {
+    background-color: #BBFAAF;
+}
+
+#logout {
+    display: flex;
+
+    bottom: 0;
+}

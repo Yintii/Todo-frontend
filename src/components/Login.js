@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import JWT from 'jsonwebtoken'
+import env from "react-dotenv";
 
-export const Login = ({ setUser }) => {
+export const Login = ({ setUserName, setUserID }) => {
 
     const navigate = useNavigate()
 
@@ -34,10 +36,6 @@ export const Login = ({ setUser }) => {
             let data = await response.json()
 
             localStorage.setItem("user", data.user)
-
-            console.log("User we just retreived: ", localStorage.getItem("user"))
-
-            setUser(localStorage.getItem("user"));
             navigate('/')
 
         } catch (error) {
@@ -46,28 +44,30 @@ export const Login = ({ setUser }) => {
     }
 
 
+
     return (
         <Container className='p-5'>
             <Row>
-                <Col sm={12}>
+                <Col sm={12} className="text-center">
                     <h1>Todos App</h1>
                     <p>MERN with JWT authentication</p>
                 </Col>
             </Row>
             <Row>
                 <Col sm={12}>
-                    <Form className="w-75 mx-auto my-5" onSubmit={handleSubmit}>
+                    <Form className="w-50 mx-auto my-5" onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="username" placeholder="Username" onChange={handleUsernameChange} required />
                             <Form.Label className='mt-4'>Password</Form.Label>
                             <Form.Control type="password" placeholder="GoodPassword1@4!" onChange={handlePasswordChange} required />
                         </Form.Group>
-                        <Button type="submit" className="my-2 w-100">
-                            Submit
+                        <Button variant='dark' type="submit" className="mt-5 w-100">
+                            Log in
                         </Button>
                     </Form >
                 </Col>
+                <p className='text-white text-center'>Don't have an account yet? <Link className="text-white" to={'/register'}>Sign up here</Link> </p>
             </Row>
         </Container>
     )
